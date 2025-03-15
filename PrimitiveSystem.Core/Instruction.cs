@@ -1,12 +1,13 @@
 ﻿namespace PrimitiveSystem.Core;
 
+// always must be <name>[Arg|To|From<ArgumentKind1>[Arg|To|From<ArgumentKind2>...]]
 public enum Instruction
 {
     // None = 0,
     // MOVE
-    MoveNumberToRegister = 11,
+    MoveArgNumberToRegister = 11,
     // ADD
-    AddNumberToRegister = 21,
+    AddArgNumberToRegister = 21,
     // SPECIAL
-    PrintRegister = 91,
+    PrintFromRegister = 91,
 }

@@ -55,13 +55,7 @@ public class Compiler
             return ParseArg(s.Split("To")[1]);
         }
         
-        return Enum.GetValues(typeof(Instruction)).Cast<Instruction>().Select(x =>
-            x.ToString() switch
-            {
-                { } s when s.StartsWith("Move") => new CommandDescription("MOVE", x, ParseFirstArg(s), ParseSecondArg(s)),
-                { } s when s.StartsWith("Add") => new CommandDescription("ADD", x, ParseFirstArg(s), ParseSecondArg(s)),
-                { } s when s.StartsWith("Print") => new CommandDescription("PRINT", x, ParseArg(s))
-            }
-        ).ToArray();
+        return Enum.GetValues(typeof(Instruction)).Cast<Instruction>()
+            .Select(CommandDescription.AutoParse).ToArray();
     }
 }

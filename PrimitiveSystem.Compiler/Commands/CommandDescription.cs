@@ -20,4 +20,16 @@ public record CommandDescription(string Name, Instruction Instruction, params Ar
         }
         return new Command(Instruction, args);
     }
+
+    public static CommandDescription AutoParse(Instruction instruction)
+    {
+        var line = instruction.ToString();
+        var tokens = line.Split(["Arg", "To", "From"]);
+        var argumentKinds = tokens[1..].Select(x => x switch
+        {
+            "Register" => ArgumentKind.Register,
+            "Number" => ArgumentKind.Number,
+        }).ToArray();
+        return new CommandDescription(tokens[0], instruction, argumentKinds);
+    }
 };
