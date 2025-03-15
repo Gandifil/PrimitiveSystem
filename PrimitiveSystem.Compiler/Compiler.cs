@@ -22,19 +22,9 @@ public class Compiler
     {
         if (string.IsNullOrEmpty(line))
             return;
-
-        var allCommandDescriptions = GenerateCommandDescriptions();
             
         var tokens = Tokenizer.Parse(line);
-
-        var command = new Command()
-        {
-            Instruction = tokens.First(),
-            CommandDescription = FindCommandDescription(tokens),
-            Arguments = tokens[1 ..]
-        };
-        
-        command.ToRaw().Write(writer);
+        FindCommandDescription(tokens).Generate(tokens).Write(writer);
     }
 
     private CommandDescription FindCommandDescription(Token[] tokens)

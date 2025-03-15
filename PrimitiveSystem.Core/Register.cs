@@ -2,7 +2,6 @@
 
 public enum Register
 {
-    None = 0,
-    Accum = 1,
-    Length = 2,
+    Accum,
+    Length,
 }
