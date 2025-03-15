@@ -3,5 +3,6 @@
 public enum Register
 {
     Accum,
+    CommandPointer,
     Length,
 }

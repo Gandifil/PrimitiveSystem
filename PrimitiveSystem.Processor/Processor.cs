@@ -17,9 +17,11 @@ public class Processor
 
     public void Run()
     {
-        for (int i = 0; i < _commands.Length; i++)
+        _registers[(int)Register.CommandPointer] = 0;
+        while (_registers[(int)Register.CommandPointer] < _commands.Length)
         {
-            Process(_commands[i]);
+            Process(_commands[_registers[(int)Register.CommandPointer]]);
+            _registers[(int)Register.CommandPointer]++;
         }
     }
 
@@ -35,29 +37,6 @@ public class Processor
                 break;
             case Instruction.PrintRegister:
                 Console.Write(_registers[command.Arguments[0]]);
-                break;
-        }
-    }
-
-    public void Process(BinaryReader reader)
-    {
-        while (reader.BaseStream.Position < reader.BaseStream.Length)
-            Process((Instruction)reader.ReadInt32(), reader);
-    }
-
-    private void Process(Instruction instruction, BinaryReader reader)
-    {
-        var firstArg = reader.ReadInt32();
-        switch (instruction)
-        {
-            case Instruction.MoveNumberToRegister:
-                _registers[reader.ReadInt32()] = firstArg;
-                break;
-            case Instruction.AddNumberToRegister:
-                _registers[reader.ReadInt32()] += firstArg;
-                break;
-            case Instruction.PrintRegister:
-                Console.Write(_registers[firstArg]);
                 break;
         }
     }
