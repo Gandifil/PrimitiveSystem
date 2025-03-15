@@ -10,4 +10,6 @@ public enum Instruction
     AddArgNumberToRegister = 21,
     // SPECIAL
     PrintFromRegister = 91,
+    // CONTROL
+    Exit = 100,
 }

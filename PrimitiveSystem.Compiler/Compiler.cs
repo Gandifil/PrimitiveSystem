@@ -29,7 +29,7 @@ public class Compiler
 
     private CommandDescription FindCommandDescription(Token[] tokens)
     {
-        return _commandDescriptions.First(x => x.Name == tokens.First().Value);
+        return _commandDescriptions.First(x => x.Name.ToUpper() == tokens.First().Value);
     }
 
     private CommandDescription[] GenerateCommandDescriptions()

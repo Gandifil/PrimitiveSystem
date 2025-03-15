@@ -29,14 +29,17 @@ public class Processor
     {
         switch (command.Instruction)
         {
-            case Instruction.MoveNumberToRegister:
+            case Instruction.MoveArgNumberToRegister:
                 _registers[command.Arguments[1]] = command.Arguments[0];
                 break;
-            case Instruction.AddNumberToRegister:
+            case Instruction.AddArgNumberToRegister:
                 _registers[command.Arguments[1]] = command.Arguments[0];
                 break;
-            case Instruction.PrintRegister:
+            case Instruction.PrintFromRegister:
                 Console.Write(_registers[command.Arguments[0]]);
+                break;
+            case Instruction.Exit:
+                _registers[(int)Register.CommandPointer] = _commands.Length;
                 break;
         }
     }
