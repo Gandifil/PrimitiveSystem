@@ -12,4 +12,6 @@ public enum Instruction
     PrintFromRegister = 91,
     // CONTROL
     Exit = 100,
+    CallToNumber = 101,
+    Return = 102,
 }

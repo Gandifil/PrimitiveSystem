@@ -5,6 +5,7 @@ namespace PrimitiveSystem.Processor;
 public class Processor
 {
     private Command[] _commands;
+    private Stack<int> _callStack = new();
     private int[] _registers = new int[(int)Register.Length];
 
     public void LoadCommands(BinaryReader reader)
@@ -40,6 +41,13 @@ public class Processor
                 break;
             case Instruction.Exit:
                 _registers[(int)Register.CommandPointer] = _commands.Length;
+                break;
+            case Instruction.CallToNumber:
+                _callStack.Push(_registers[(int)Register.CommandPointer]);
+                _registers[(int)Register.CommandPointer] = command.Arguments[0] - 1;
+                break;
+            case Instruction.Return:
+                _registers[(int)Register.CommandPointer] = _callStack.Pop();
                 break;
         }
     }
